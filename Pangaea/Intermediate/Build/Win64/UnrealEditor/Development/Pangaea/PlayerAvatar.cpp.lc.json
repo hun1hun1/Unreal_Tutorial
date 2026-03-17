@@ -1,0 +1,21 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\ue_5.0.3_projects\\pangaea\\source\\pangaea\\playeravatar.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\ue_5.0.3_projects\\pangaea\\intermediate\\build\\win64\\pangaeaeditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "d:\\ue_5.0.3_projects\\pangaea\\intermediate\\build\\win64\\unrealeditor\\development\\pangaea\\definitions.pangaea.h",
+            "d:\\ue_5.0.3_projects\\pangaea\\source\\pangaea\\playeravatar.h",
+            "d:\\epic games\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\gameframework\\character.h",
+            "d:\\epic games\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\gameframework\\charactermovementreplication.h",
+            "d:\\epic games\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\charactermovementreplication.generated.h",
+            "d:\\epic games\\ue_5.0\\engine\\source\\runtime\\engine\\classes\\gameframework\\rootmotionsource.h",
+            "d:\\epic games\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\rootmotionsource.generated.h",
+            "d:\\epic games\\ue_5.0\\engine\\intermediate\\build\\win64\\unrealeditor\\inc\\engine\\character.generated.h",
+            "d:\\ue_5.0.3_projects\\pangaea\\intermediate\\build\\win64\\unrealeditor\\inc\\pangaea\\playeravatar.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

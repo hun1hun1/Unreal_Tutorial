@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\ue_5.0.3_projects\\pangaea\\intermediate\\build\\win64\\unrealeditor\\inc\\pangaea\\projectile.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\ue_5.0.3_projects\\pangaea\\intermediate\\build\\win64\\pangaeaeditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "d:\\ue_5.0.3_projects\\pangaea\\intermediate\\build\\win64\\unrealeditor\\development\\pangaea\\definitions.pangaea.h",
+            "d:\\ue_5.0.3_projects\\pangaea\\source\\pangaea\\projectile.h",
+            "d:\\ue_5.0.3_projects\\pangaea\\intermediate\\build\\win64\\unrealeditor\\inc\\pangaea\\projectile.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}

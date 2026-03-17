@@ -1,0 +1,15 @@
+{
+    "Version": "1.2",
+    "Data": {
+        "Source": "d:\\ue_5.0.3_projects\\myshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\myshooter\\myshooterprojectile.gen.cpp",
+        "ProvidedModule": "",
+        "PCH": "d:\\ue_5.0.3_projects\\myshooter\\intermediate\\build\\win64\\myshootereditor\\development\\engine\\sharedpch.engine.shadowerrors.h.pch",
+        "Includes": [
+            "d:\\ue_5.0.3_projects\\myshooter\\intermediate\\build\\win64\\unrealeditor\\development\\myshooter\\definitions.myshooter.h",
+            "d:\\ue_5.0.3_projects\\myshooter\\source\\myshooter\\myshooterprojectile.h",
+            "d:\\ue_5.0.3_projects\\myshooter\\intermediate\\build\\win64\\unrealeditor\\inc\\myshooter\\myshooterprojectile.generated.h"
+        ],
+        "ImportedModules": [],
+        "ImportedHeaderUnits": []
+    }
+}
