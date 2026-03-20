@@ -4,12 +4,21 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Components/BoxComponent.h"
+#include "Components/StaticMeshComponent.h"
 #include "DefenseTower.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable)
 class PANGAEA_API ADefenseTower : public AActor
 {
 	GENERATED_BODY()
+
+private:
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Tower Component", meta = (AllowPrivateAccess = "true"))
+	UBoxComponent* _BoxComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Tower Component", meta = (AllowPrivateAccess = "true"))
+	UStaticMeshComponent* _MeshComponent;
 	
 public:	
 	// Sets default values for this actor's properties
@@ -38,11 +47,27 @@ public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION(BlueprintCallable, Category = "Pangaea|Defense Tower", meta = (DisplayName = "GetHP"))
 	int GetHealthPoints();
+
+	UFUNCTION(BlueprintCallable, Category = "Pangaea|Defense Tower")
 	bool IsDestroyed();
+
+	UFUNCTION(BlueprintCallable, Category = "Pangaea|Defense Tower")
 	bool CanFire();
+
 	void Fire();
 	void Hit(int damage);
+
+	FORCEINLINE UBoxComponent* GetBoxComponent() const
+	{
+		return _BoxComponent;
+	}
+
+	FORCEINLINE UStaticMeshComponent* GetMeshComponent() const
+	{
+		return _MeshComponent;
+	}
 
 protected:
 	void DestroyProcess();

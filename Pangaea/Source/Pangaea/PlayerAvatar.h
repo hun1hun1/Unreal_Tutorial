@@ -4,9 +4,11 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
+#include "GameFramework/SpringArmComponent.h"
+#include "Camera/CameraComponent.h"
 #include "PlayerAvatar.generated.h"
 
-UCLASS()
+UCLASS(Blueprintable)
 class PANGAEA_API APlayerAvatar : public ACharacter
 {
 	GENERATED_BODY()
@@ -37,6 +39,14 @@ protected:
 	int _HealthPoints;
 	float _AttackCountingDown;
 
+private:
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
+	class USpringArmComponent* _springArmComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
+	class UCameraComponent* _cameraComponent;
+
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -44,13 +54,28 @@ public:
 	// Called to bind functionality to input
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 
+	UFUNCTION(BlueprintCallable, Category = "Pangaea|PlayerCharacter", meta = (DisplayName = "Get HP"))
 	int GetHealthPoints();
+	
+	UFUNCTION(BlueprintCallable, Category = "Pangaea|PlayerCharacter")
 	bool IsKilled();
+
+	UFUNCTION(BlueprintCallable, Category = "Pangaea|PlayerCharacter")
 	bool CanAttack();
+
 	void Attack();
 	void Hit(int damage);
 
+	FORCEINLINE USpringArmComponent* GetSpringArmComponent() const
+	{
+		return _springArmComponent;
+	}
+
+	FORCEINLINE UCameraComponent* GetCameraComponent() const
+	{
+		return _cameraComponent;
+	}
+
 protected:
 	void DieProcess();
-
 };

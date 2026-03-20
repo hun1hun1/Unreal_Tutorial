@@ -50,7 +50,9 @@ void EmptyLinkFunctionForGeneratedCodeProjectile() {}
 	};
 #if WITH_METADATA
 	const UECodeGen_Private::FMetaDataPairParam Z_Construct_UClass_AProjectile_Statics::Class_MetaDataParams[] = {
+		{ "BlueprintType", "true" },
 		{ "IncludePath", "Projectile.h" },
+		{ "IsBlueprintBase", "true" },
 		{ "ModuleRelativePath", "Projectile.h" },
 	};
 #endif
@@ -116,9 +118,9 @@ void EmptyLinkFunctionForGeneratedCodeProjectile() {}
 		static const FClassRegisterCompiledInInfo ClassInfo[];
 	};
 	const FClassRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Pangaea_Source_Pangaea_Projectile_h_Statics::ClassInfo[] = {
-		{ Z_Construct_UClass_AProjectile, AProjectile::StaticClass, TEXT("AProjectile"), &Z_Registration_Info_UClass_AProjectile, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AProjectile), 1100186312U) },
+		{ Z_Construct_UClass_AProjectile, AProjectile::StaticClass, TEXT("AProjectile"), &Z_Registration_Info_UClass_AProjectile, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(AProjectile), 1268049676U) },
 	};
-	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Pangaea_Source_Pangaea_Projectile_h_4123772172(TEXT("/Script/Pangaea"),
+	static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Pangaea_Source_Pangaea_Projectile_h_2866194135(TEXT("/Script/Pangaea"),
 		Z_CompiledInDeferFile_FID_Pangaea_Source_Pangaea_Projectile_h_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Pangaea_Source_Pangaea_Projectile_h_Statics::ClassInfo),
 		nullptr, 0,
 		nullptr, 0);

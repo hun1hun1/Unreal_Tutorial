@@ -53,10 +53,22 @@
     <ClInclude Include="..\..\Source\Pangaea\PangaeaCharacter.h">
       <Filter>Source\Pangaea</Filter>
     </ClInclude>
+    <ClCompile Include="..\..\Source\Pangaea\PangaeaGameInstance.cpp">
+      <Filter>Source\Pangaea</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Pangaea\PangaeaGameInstance.h">
+      <Filter>Source\Pangaea</Filter>
+    </ClInclude>
     <ClCompile Include="..\..\Source\Pangaea\PangaeaGameMode.cpp">
       <Filter>Source\Pangaea</Filter>
     </ClCompile>
     <ClInclude Include="..\..\Source\Pangaea\PangaeaGameMode.h">
+      <Filter>Source\Pangaea</Filter>
+    </ClInclude>
+    <ClCompile Include="..\..\Source\Pangaea\PangaeaGameState.cpp">
+      <Filter>Source\Pangaea</Filter>
+    </ClCompile>
+    <ClInclude Include="..\..\Source\Pangaea\PangaeaGameState.h">
       <Filter>Source\Pangaea</Filter>
     </ClInclude>
     <ClCompile Include="..\..\Source\Pangaea\PangaeaPlayerController.cpp">
