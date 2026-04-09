@@ -26,7 +26,7 @@ class PANGAEA_API UPlayerAvatarAnimInstance : public UAnimInstance
 	
 public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
-	float speed;
+	float Speed;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 	bool IsAttacking;

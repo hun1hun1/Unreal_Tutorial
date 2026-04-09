@@ -3,6 +3,7 @@
 
 #include "PlayerAvatar.h"
 #include "GameFramework/CharacterMovementComponent.h"
+#include "PlayerAvatarAnimInstance.h"
 
 // Sets default values
 APlayerAvatar::APlayerAvatar()
@@ -44,6 +45,19 @@ void APlayerAvatar::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	UPlayerAvatarAnimInstance* animInst = Cast<UPlayerAvatarAnimInstance>(GetMesh()->GetAnimInstance());
+	animInst->Speed = GetCharacterMovement()->Velocity.Size2D();
+
+	if (_AttackCountingDown == AttackInterval)
+	{
+		animInst->State = EPlayerState::Attack;
+	}
+
+	if (_AttackCountingDown > 0.0f)
+	{
+		_AttackCountingDown -= DeltaTime;
+	}
+
 }
 
 // Called to bind functionality to input
@@ -65,5 +79,18 @@ bool APlayerAvatar::IsKilled()
 
 bool APlayerAvatar::CanAttack()
 {
-	return (_AttackCountingDown <= 0.0f);
+	UPlayerAvatarAnimInstance* animInst = Cast<UPlayerAvatarAnimInstance>(GetMesh()->GetAnimInstance());
+	return (_AttackCountingDown <= 0.0f && animInst->State == EPlayerState::Locomotion);
+}
+
+void APlayerAvatar::Attack()
+{
+	_AttackCountingDown = AttackInterval;
+}
+
+void APlayerAvatar::DieProcess()
+{
+	PrimaryActorTick.bCanEverTick = false;
+	Destroy();
+	GEngine->ForceGarbageCollection(true);
 }

@@ -7,6 +7,7 @@
 #include "NiagaraFunctionLibrary.h"
 #include "PangaeaCharacter.h"
 #include "Engine/World.h"
+#include "PlayerAvatar.h"
 
 APangaeaPlayerController::APangaeaPlayerController()
 {
@@ -61,6 +62,7 @@ void APangaeaPlayerController::SetupInputComponent()
 	InputComponent->BindTouch(EInputEvent::IE_Pressed, this, &APangaeaPlayerController::OnTouchPressed);
 	InputComponent->BindTouch(EInputEvent::IE_Released, this, &APangaeaPlayerController::OnTouchReleased);
 
+	InputComponent->BindAction("Attack", IE_Pressed, this, &APangaeaPlayerController::OnAttackPressed);
 }
 
 void APangaeaPlayerController::OnSetDestinationPressed()
@@ -101,4 +103,13 @@ void APangaeaPlayerController::OnTouchReleased(const ETouchIndex::Type FingerInd
 {
 	bIsTouch = false;
 	OnSetDestinationReleased();
+}
+
+void APangaeaPlayerController::OnAttackPressed()
+{
+	auto playerAvatar = Cast<APlayerAvatar>(GetPawn());
+	if (playerAvatar->CanAttack())
+	{
+		playerAvatar->Attack();
+	}
 }
