@@ -88,6 +88,11 @@ void APlayerAvatar::Attack()
 	_AttackCountingDown = AttackInterval;
 }
 
+void APlayerAvatar::Hit(int damage)
+{
+
+}
+
 void APlayerAvatar::DieProcess()
 {
 	PrimaryActorTick.bCanEverTick = false;

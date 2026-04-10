@@ -4,7 +4,6 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "Components/BoxComponent.h"
 #include "Components/StaticMeshComponent.h"
 #include "DefenseTower.generated.h"
 
@@ -15,7 +14,7 @@ class PANGAEA_API ADefenseTower : public AActor
 
 private:
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Tower Component", meta = (AllowPrivateAccess = "true"))
-	UBoxComponent* _BoxComponent;
+	class USphereComponent* _SphereComponent;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Tower Component", meta = (AllowPrivateAccess = "true"))
 	UStaticMeshComponent* _MeshComponent;
@@ -40,6 +39,8 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+	UClass* _FireballClass;
+
 	int _HealthPoints;
 	float _ReloadCountingDown;
 
@@ -59,9 +60,9 @@ public:
 	void Fire();
 	void Hit(int damage);
 
-	FORCEINLINE UBoxComponent* GetBoxComponent() const
+	FORCEINLINE USphereComponent* GetSphereComponent() const
 	{
-		return _BoxComponent;
+		return _SphereComponent;
 	}
 
 	FORCEINLINE UStaticMeshComponent* GetMeshComponent() const
@@ -71,4 +72,15 @@ public:
 
 protected:
 	void DestroyProcess();
+
+	class APlayerAvatar* _Target = nullptr;
+
+	UFUNCTION()
+	void OnBeginOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* Othercomponent, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	UFUNCTION()
+	void OnEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex);
+
+	UFUNCTION(BlueprintCallable)
+	void OnMeshBeginOverlap(AActor* OtherActor);
 };
