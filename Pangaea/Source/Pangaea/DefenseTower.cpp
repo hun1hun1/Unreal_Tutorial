@@ -8,9 +8,8 @@
 #include "Components/SphereComponent.h"
 #include "Kismet/KismetMathLibrary.h"
 #include "Kismet/GameplayStatics.h"
-#include "Weapon.h"
 
-//#include "PangaeaGameMode.h"
+#include "PangaeaGameMode.h"
 
 // Sets default values
 ADefenseTower::ADefenseTower()
@@ -34,7 +33,9 @@ ADefenseTower::ADefenseTower()
 void ADefenseTower::BeginPlay()
 {
 	Super::BeginPlay();
-	SetActorTickInterval(0.5f);
+	_SphereComponent->SetSphereRadius(AttackRange);
+	SetActorTickInterval(ReloadInterval);
+	_PangaeaGameMode = Cast<APangaeaGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
 }
 
 // Called every frame
@@ -42,7 +43,7 @@ void ADefenseTower::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if (_Target != nullptr)
+	if (_Target != nullptr && GetNetMode() != NM_Client)
 	{
 		Fire();
 	}
@@ -101,19 +102,5 @@ void ADefenseTower::OnEndOverlap(UPrimitiveComponent* OverlappedComponent, AActo
 	if (_Target != nullptr && OtherActor == _Target)
 	{
 		_Target = nullptr;
-	}
-}
-
-void ADefenseTower::OnMeshBeginOverlap(AActor* OtherActor)
-{
-	AWeapon* weapon = Cast<AWeapon>(OtherActor);
-	if (weapon == nullptr || weapon->Holder == nullptr)
-	{
-		return;
-	}
-
-	if (CanBeDamaged())
-	{
-		Hit(_Target->Strength);
 	}
 }

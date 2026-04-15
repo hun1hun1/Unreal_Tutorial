@@ -3,6 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "HealthBarWidget.h"
 #include "GameFramework/Character.h"
 #include "PangaeaCharacter.generated.h"
 
@@ -14,21 +15,56 @@ class APangaeaCharacter : public ACharacter
 public:
 	APangaeaCharacter();
 
+	void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+
+	UPROPERTY(EditAnywhere, Category = "Pangaea Character Params")
+	int HealthPoints = 100;			//the character's max health points
+
+	UPROPERTY(EditAnywhere, Category = "Pangaea Character Params")
+	float Strength = 5;			//the character's attack strength
+
+	UPROPERTY(EditAnywhere, Category = "Pangaea Character Params")
+	float Armor = 1;				//the character's defense armor
+
+	UPROPERTY(EditAnywhere, Category = "Pangaea Character Params")
+	float AttackRange = 200.0f;		//the character's attack range
+
+	UPROPERTY(EditAnywhere, Category = "Pangaea Character Params")
+	float AttackInterval = 3.0f;	//the character's attack invertval
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+	UUserWidget* HealthBarWidget;
+
 	// Called every frame.
 	virtual void Tick(float DeltaSeconds) override;
 
-	/** Returns TopDownCameraComponent subobject **/
-	FORCEINLINE class UCameraComponent* GetTopDownCameraComponent() const { return TopDownCameraComponent; }
-	/** Returns CameraBoom subobject **/
-	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
+	UFUNCTION(BlueprintCallable, Category = "Pangaea|Character", meta = (DisplayName = "Get HP"))
+	int GetHealthPoints();			//get current health points
 
-private:
-	/** Top down camera */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	class UCameraComponent* TopDownCameraComponent;
+	UFUNCTION(BlueprintCallable, Category = "Pangaea|Character")
+	bool IsKilled();				//check if the character has been killed
 
-	/** Camera boom positioning the camera above the character */
-	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
-	class USpringArmComponent* CameraBoom;
+	UFUNCTION(BlueprintCallable, Category = "Pangaea|Character")
+	bool CanAttack();
+	bool IsAttacking();
+
+	virtual void Attack();
+	virtual void Hit(int damage);
+	virtual void DieProcess();
+
+	UFUNCTION(NetMulticast, Reliable)
+	void Attack_Broadcast_RPC();
+
+protected:
+	virtual void BeginPlay() override;
+
+	class UPangaeaAnimInstance* _AnimInstance;
+
+	UPROPERTY(Replicatedusing = OnHealthPointsChanged)
+	int _HealthPoints;
+	float _AttackCountingDown;
+
+	UFUNCTION()
+	void OnHealthPointsChanged();
 };
 

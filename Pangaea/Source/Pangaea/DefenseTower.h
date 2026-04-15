@@ -30,10 +30,10 @@ public:
 	int ShellDefense = 2;
 
 	UPROPERTY(EditAnywhere, Category = "Tower Params")
-	float AttackRange = 15.0f;
+	float AttackRange = 800.0f;
 
 	UPROPERTY(EditAnywhere, Category = "Tower Params")
-	float ReloadInterval = 1.0f;
+	float ReloadInterval = 0.5f;
 
 protected:
 	// Called when the game starts or when spawned
@@ -44,6 +44,7 @@ protected:
 	int _HealthPoints;
 	float _ReloadCountingDown;
 
+	class APangaeaGameMode* _PangaeaGameMode;
 public:	
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
@@ -80,7 +81,4 @@ protected:
 
 	UFUNCTION()
 	void OnEndOverlap(UPrimitiveComponent* OverlappedComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, int32 OtherBodyIndex);
-
-	UFUNCTION(BlueprintCallable)
-	void OnMeshBeginOverlap(AActor* OtherActor);
 };

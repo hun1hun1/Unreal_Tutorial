@@ -2,6 +2,8 @@
 
 
 #include "Projectile.h"
+#include "Kismet/GameplayStatics.h"
+#include "PangaeaGameMode.h"
 #include "PlayerAvatar.h"
 
 // Sets default values
@@ -9,6 +11,7 @@ AProjectile::AProjectile()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+	bReplicates = true;
 
 	_MeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("Static Mesh"));
 	SetRootComponent(_MeshComponent);
@@ -19,13 +22,19 @@ void AProjectile::BeginPlay()
 {
 	Super::BeginPlay();
 	
-	_LifeCountingDown = Lifespan;
+	_PangaeaGameMode = Cast<APangaeaGameMode>(UGameplayStatics::GetGameMode(GetWorld()));
+	Reset();
 }
 
 // Called every frame
 void AProjectile::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	if (GetNetMode() == NM_Client)
+	{
+		return;
+	}
 
 	if (_LifeCountingDown > 0.0f)
 	{
@@ -45,8 +54,7 @@ void AProjectile::Tick(float DeltaTime)
 			{
 				playerAvatar->Hit(Damage);
 
-				PrimaryActorTick.bCanEverTick = false;
-				Destroy();
+				_PangaeaGameMode->RecycleFireball(this);
 			}
 		}
 
@@ -54,8 +62,14 @@ void AProjectile::Tick(float DeltaTime)
 	}
 	else
 	{
-		PrimaryActorTick.bCanEverTick = false;
-		Destroy();
+		_PangaeaGameMode->RecycleFireball(this);
 	}
 }
 
+void AProjectile::Reset()
+{
+	_LifeCountingDown = Lifespan;
+	SetActorHiddenInGame(false);
+	SetActorEnableCollision(true);
+	SetActorTickEnabled(true);
+}
